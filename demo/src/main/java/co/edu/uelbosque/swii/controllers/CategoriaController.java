@@ -18,7 +18,6 @@ import co.edu.uelbosque.swii.entidades.Categoria;
 import co.edu.uelbosque.swii.persistencia.CategoriaPersistense;
 
 @RestController
-@RequestMapping("/api")
 public class CategoriaController {
 
 	@Autowired
@@ -47,7 +46,7 @@ public class CategoriaController {
 	}
 	
 	//Update a Categoria
-	@PutMapping("/categoria/{id}")
+	@RequestMapping(value="/categoria/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Categoria> updateCategoria(@PathVariable(value="id") Long id,
 			@Valid @RequestBody Categoria categoria) {
 		Categoria c = cp.findOne(id);
