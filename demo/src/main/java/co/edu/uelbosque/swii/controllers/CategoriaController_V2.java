@@ -38,7 +38,7 @@ public class CategoriaController_V2 {
 	}
 	
 	//Obtener una sola categoria
-	@GetMapping("/categorias/{i}")
+	@GetMapping("/categorias/{id}")
 	public ResponseEntity<Categoria> getCategoriaById(@PathVariable(value="id") Long catId) {
 		Categoria categoria = cp.findOne(catId);
 		if(categoria == null) {
@@ -48,7 +48,7 @@ public class CategoriaController_V2 {
 	}
 	
 	//Actualizar una categoria
-	@PutMapping("/categoria/{id}")
+	@PutMapping("/categorias/{id}")
 	public ResponseEntity<Categoria> updateCategoria(@PathVariable(value="id") Long catId,
 													 @Valid @RequestBody Categoria catDetalles) {
 		Categoria categoria = cp.findOne(catId);
