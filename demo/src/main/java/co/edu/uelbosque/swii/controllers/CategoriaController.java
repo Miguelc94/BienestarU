@@ -5,69 +5,75 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.solr.core.RequestMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uelbosque.swii.entidades.Categoria;
 import co.edu.uelbosque.swii.persistencia.CategoriaPersistense;
 
+@Controller
 @RestController
+@RequestMapping("/api")
 public class CategoriaController {
 
 	@Autowired
 	CategoriaPersistense cp;
 	
-	//GET all Categorias
-	@RequestMapping(value="/categorias", method=RequestMethod.GET)
-	public List<Categoria> getAllCategorias() {
+	//Obterner todas las categorias
+	@GetMapping("/api/categorias")
+	//	@GetMapping("/categorias")
+	public List<Categoria> getAllCategoria() {
 		return cp.findAll();
 	}
 	
-	//create a new Categoria
-	@RequestMapping(value="/categoria/add", method=RequestMethod.POST)
-	public Categoria createCategoria(@RequestParam String categoria) {
-		return cp.save(new Categoria(categoria));
+	//Crear una nueva categoria
+	@PostMapping("/categorias")
+	public Categoria createCategoria(@Valid @RequestBody Categoria categoria) {
+		return cp.save(categoria);
 	}
 	
-	//GET a Single Categoria
-	@RequestMapping(value="/categoria/single", method=RequestMethod.GET)
-	public ResponseEntity<Categoria> getCategoriaById(@RequestParam Long id){
-		Categoria categoria = cp.findOne(id);
+	//Obtener una sola categoria
+	@GetMapping("/categorias/{id}")
+	public ResponseEntity<Categoria> getCategoriaById(@PathVariable(value="id") Long catId) {
+		Categoria categoria = cp.findOne(catId);
 		if(categoria == null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok().body(categoria);
 	}
 	
-	//Update a Categoria
-	@RequestMapping(value="/categoria/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Categoria> updateCategoria(@PathVariable(value="id") Long id,
-			@Valid @RequestBody Categoria categoria) {
-		Categoria c = cp.findOne(id);
-		if(c == null) {
-			return ResponseEntity.notFound().build();
-		}
-		c.setNombre(categoria.getNombre());
-		
-		Categoria updateCategoria = cp.save(c);
-		return ResponseEntity.ok(updateCategoria);
-	}
-	
-	//Delete a Categoria
-	@RequestMapping(value="/categoria/delete/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Categoria> deleteCategoria(@RequestParam Long id) {
-		Categoria categoria = cp.findOne(id);
+	//Actualizar una categoria
+	@PutMapping("/categorias/{id}")
+	public ResponseEntity<Categoria> updateCategoria(@PathVariable(value="id") Long catId,
+													 @Valid @RequestBody Categoria catDetalles) {
+		Categoria categoria = cp.findOne(catId);
 		if(categoria == null) {
 			return ResponseEntity.notFound().build();
-		}		
+		}
+		categoria.setNombre(catDetalles.getNombre());
+		
+		Categoria updateCat = cp.save(categoria);
+		return ResponseEntity.ok(updateCat);
+	}
+	
+	//Borrar una categoria
+	@DeleteMapping("/categorias/{id}")
+	public ResponseEntity<Categoria> deleteCategoria(@PathVariable(value="id") Long catId) {
+		Categoria categoria = cp.findOne(catId);
+		if(categoria == null) {
+			return ResponseEntity.notFound().build();
+		}
+		
 		cp.delete(categoria);
 		return ResponseEntity.ok().build();
-	}
+	}	
 }
-
