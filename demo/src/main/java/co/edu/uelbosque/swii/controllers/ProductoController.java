@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,13 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uelbosque.swii.entidades.Producto;
 import co.edu.uelbosque.swii.persistencia.ProductoPersistence;
 
+@Controller
 @RestController
 @RequestMapping("/api")
 public class ProductoController {
@@ -34,13 +34,13 @@ public class ProductoController {
 	}
 	
 	//POST para crear
-	@PostMapping("/producto/add")
+	@PostMapping("/productos/add")
 	public Producto addProducto(@Valid @RequestBody Producto producto) {
 		return pp.save(producto);
 	}
 	
 	//Get a Single Producto
-	@GetMapping("/producto/{id}")
+	@GetMapping("/productos/{id}")
 	public ResponseEntity<Producto> getProductoById(@PathVariable(value="id") Long id){
 		Producto producto = pp.findOne(id);
 		if(producto == null) {
@@ -50,7 +50,7 @@ public class ProductoController {
 	}
 	
 	//Update
-	@PutMapping("/producto/{id}")
+	@PutMapping("/productos/{id}")
 	public ResponseEntity<Producto> updateProducto(@PathVariable(value="id") Long codPro,
 												   @Valid @RequestBody Producto producto) {
 		Producto p = pp.findOne(codPro);
@@ -64,7 +64,7 @@ public class ProductoController {
 	}
 	
 	//Delete
-	@DeleteMapping("/producto/delete/{id}")
+	@DeleteMapping("/productos/{id}")
 	public ResponseEntity<Producto> deleteProducto(@PathVariable Long id) {
 		Producto producto = pp.findOne(id);
 		if(producto == null) {

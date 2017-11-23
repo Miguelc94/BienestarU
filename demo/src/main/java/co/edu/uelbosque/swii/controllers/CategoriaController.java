@@ -29,14 +29,14 @@ public class CategoriaController {
 	CategoriaPersistense cp;
 	
 	//Obterner todas las categorias
-	@GetMapping("/api/categorias")
+	@GetMapping("/categorias")
 	//	@GetMapping("/categorias")
 	public List<Categoria> getAllCategoria() {
 		return cp.findAll();
 	}
 	
 	//Crear una nueva categoria
-	@PostMapping("/categorias")
+	@PostMapping("/categorias/add")
 	public Categoria createCategoria(@Valid @RequestBody Categoria categoria) {
 		return cp.save(categoria);
 	}

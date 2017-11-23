@@ -1,29 +1,28 @@
 package co.edu.uelbosque.swii.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name="categorias")
+@Table(name = "categorias")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true) 
+@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
 public class Categoria implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
-	
-	public Categoria() {}
-	
-	public Categoria(String categoria) {
-		this.nombre = categoria;
+
+	public Categoria() {
 	}
-	
-	public Categoria(long i, String categoria) {
-		this.id = i;
+
+	public Categoria(String categoria) {
 		this.nombre = categoria;
 	}
 

@@ -1,14 +1,17 @@
 package co.edu.uelbosque.swii.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "productos")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true) 
+@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
 public class Producto implements Serializable {
 
 	@Id
@@ -16,19 +19,20 @@ public class Producto implements Serializable {
 	private Long id;
 	private String nombre;
 	private Boolean estado;
-	private Categoria categoria;
+	private Long categoria;
 
-	public Producto() {
+	public Producto() {		
 	}
-
-	public Producto(String nombre, Boolean estado, Categoria categoria) {
+	
+	public Producto(Long id, String nombre, Boolean estado, Long categoria) {
+		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.estado = estado;
 		this.categoria = categoria;
 	}
 
-	public Producto(Long id, String nombre, Boolean estado, Categoria categoria) {
-		this.id = id;
+	public Producto(String nombre, Boolean estado, Long categoria) {
 		this.nombre = nombre;
 		this.estado = estado;
 		this.categoria = categoria;
@@ -58,11 +62,11 @@ public class Producto implements Serializable {
 		this.estado = estado;
 	}
 
-	public Categoria getCategoria() {
+	public Long getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(Long categoria) {
 		this.categoria = categoria;
 	}
 

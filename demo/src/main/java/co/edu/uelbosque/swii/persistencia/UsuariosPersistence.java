@@ -3,9 +3,9 @@ package co.edu.uelbosque.swii.persistencia;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import co.edu.uelbosque.swii.entidades.Categoria;
+import co.edu.uelbosque.swii.entidades.Users;
 
 @Repository
-public interface CategoriaPersistense extends JpaRepository<Categoria, Long> {
+public interface UsuariosPersistence extends JpaRepository<Users, String> {
 
 }
