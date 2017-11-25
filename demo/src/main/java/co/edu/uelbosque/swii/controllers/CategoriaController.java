@@ -31,14 +31,14 @@ public class CategoriaController {
 	private ICategoriaPersistense cp;
 
 	// Obtener una sola categoria
-	@GetMapping("/categorias/{id}")
+	@GetMapping("/categorias")
 	public ResponseEntity<Categoria> getCategoriaById(@RequestParam("id") String id) {
 		Categoria categoria = cp.getCategoriaById(Integer.parseInt(id));
 		return new ResponseEntity<Categoria>(categoria, HttpStatus.OK);
 	}
 
 	// Obterner todas las categorias
-	@GetMapping("/categorias")
+	@GetMapping("/all-categorias")
 	public ResponseEntity<List<Categoria>> getAllCategoria() {
 		List<Categoria> list = cp.getCategorias();
 		return new ResponseEntity<List<Categoria>>(list, HttpStatus.OK);
