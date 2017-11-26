@@ -5,8 +5,8 @@ import co.edu.uelbosque.swii.entidades.Categoria;
 
 public interface ICategoriaPersistense {
 	List<Categoria> getCategorias();
-	Categoria getCategoriaById(int catgeoriaId);
-	boolean createCategoria(Categoria catgeoria);
+	Categoria getCategoriaById(int categoriaId);
+	boolean createCategoria(Categoria categoria);
 	void updateCategoria(Categoria categoria);
 	void deleteCategoria(int categoriaId);
 }

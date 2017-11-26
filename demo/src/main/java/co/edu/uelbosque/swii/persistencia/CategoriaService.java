@@ -12,8 +12,8 @@ public class CategoriaService implements ICategoriaPersistense {
 	private ICategoriaDAO categoriaDAO;
 
 	@Override
-	public Categoria getCategoriaById(int catgeoriaId) {
-		Categoria obj = categoriaDAO.getCategoriaById(catgeoriaId);
+	public Categoria getCategoriaById(int categoriaId) {
+		Categoria obj = categoriaDAO.getCategoriaById(categoriaId);
 		return obj;
 	}
 
@@ -23,11 +23,11 @@ public class CategoriaService implements ICategoriaPersistense {
 	}
 
 	@Override
-	public synchronized boolean createCategoria(Categoria catgeoria) {
-		if (categoriaDAO.categoriaExists(catgeoria.getNombre())) {
+	public synchronized boolean createCategoria(Categoria categoria) {
+		if (categoriaDAO.categoriaExists(categoria.getNombre())) {
 			return false;
 		} else {
-			categoriaDAO.createCategoria(catgeoria);
+			categoriaDAO.createCategoria(categoria);
 			return true;
 		}
 	}

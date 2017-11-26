@@ -16,8 +16,8 @@ public class CategoriaDAO implements ICategoriaDAO {
 	private EntityManager entityManager;
 
 	@Override
-	public Categoria getCategoriaById(int catgeoriaId) {
-		return entityManager.find(Categoria.class, catgeoriaId);
+	public Categoria getCategoriaById(int categoriaId) {
+		return entityManager.find(Categoria.class, categoriaId);
 	}
 	
 	@SuppressWarnings("unchecked")
