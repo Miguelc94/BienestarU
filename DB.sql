@@ -5,6 +5,12 @@ use pn2;
 
 # use miguelcc_pn2;
 
+create trigger PRESTAMO
+after update on `productos`
+for each row
+insert into `prestamos` values (new.fecha_devolucion, new.fecha_prestamo, new.solicitante, new.nombre_producto);
+
+
 insert into usuarios values
 ('admin', 'admin');
 

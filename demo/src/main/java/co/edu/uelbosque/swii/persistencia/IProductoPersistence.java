@@ -11,4 +11,6 @@ public interface IProductoPersistence {
 	boolean createProducto(Producto producto);
 	void updateProducto(Producto producto);
 	void deleteProducto(int productoId);
+	List<Producto> productosDisponibles();
+	List<Producto> productosPrestados();
 }

@@ -11,4 +11,6 @@ public interface IProductoDAO {
 	void updateProducto(Producto producto);
 	void deleteProducto(int productoId);
 	boolean productoExists(String nombre);
+	List<Producto> productosDisponibles();
+	List<Producto> productosPrestados();
 }

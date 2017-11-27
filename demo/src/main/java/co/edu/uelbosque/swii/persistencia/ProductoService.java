@@ -43,4 +43,14 @@ public class ProductoService implements IProductoPersistence {
 	public void deleteProducto(int productoId) {
 		productoDAO.deleteProducto(productoId);	
 	}
+
+	@Override
+	public List<Producto> productosDisponibles() {
+		return productoDAO.productosDisponibles();
+	}
+
+	@Override
+	public List<Producto> productosPrestados() {
+		return productoDAO.productosPrestados();
+	}
 }

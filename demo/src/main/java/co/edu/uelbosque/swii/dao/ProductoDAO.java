@@ -38,6 +38,7 @@ public class ProductoDAO implements IProductoDAO {
 	public void updateProducto(Producto producto) {
 		Producto pro = getProductoById(producto.getId());
 		pro.setNombre(producto.getNombre());
+		pro.setCategoria(producto.getCategoria());
 		entityManager.flush();		
 	}
 
@@ -51,5 +52,19 @@ public class ProductoDAO implements IProductoDAO {
 		String hql ="From Producto as pro Where pro.nombre = ?";
 		int count = entityManager.createQuery(hql).setParameter(1,  nombre).getResultList().size();
 		return count > 0 ? true: false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Producto> productosDisponibles() {
+		String hql = "From Producto where estado = 1";
+		return (List<Producto>) entityManager.createQuery(hql).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Producto> productosPrestados() {
+		String hql = "From Producto where estado = 0";
+		return (List<Producto>) entityManager.createQuery(hql).getResultList();
 	}	
 }

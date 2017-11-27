@@ -30,6 +30,20 @@ public class ProductoController {
 	@Autowired
 	private IProductoPersistence pp;
 
+	// Get productos disponibles
+	@GetMapping("/disp-productos")
+	public ResponseEntity<List<Producto>> productosDisponibles() {
+		List<Producto> list = pp.productosDisponibles();
+		return new ResponseEntity<List<Producto>>(list, HttpStatus.OK);
+	}
+	
+	// Get productos prestados
+	@GetMapping("/pres-productos")
+	public ResponseEntity<List<Producto>> productosPrestados() {
+		List<Producto> list = pp.productosPrestados();
+		return new ResponseEntity<List<Producto>>(list, HttpStatus.OK);
+	}
+	
 	// Get a Single Producto
 	@GetMapping("/productos")
 	public ResponseEntity<Producto> getProductoById(@RequestParam("id") String id) {
