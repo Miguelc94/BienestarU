@@ -1,5 +1,6 @@
 package co.edu.uelbosque.swii.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,7 +9,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import co.edu.uelbosque.swii.entidades.Producto;;
+import co.edu.uelbosque.swii.entidades.Producto;
+import co.edu.uelbosque.swii.entidades.Reporte;
 
 @Transactional
 @Repository
@@ -66,5 +68,5 @@ public class ProductoDAO implements IProductoDAO {
 	public List<Producto> productosPrestados() {
 		String hql = "From Producto where estado = 0";
 		return (List<Producto>) entityManager.createQuery(hql).getResultList();
-	}	
+	}
 }

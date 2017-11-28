@@ -3,6 +3,7 @@ package co.edu.uelbosque.swii.persistencia;
 import java.util.List;
 
 import co.edu.uelbosque.swii.entidades.Producto;
+import co.edu.uelbosque.swii.entidades.Reporte;
 
 public interface IProductoPersistence {
 

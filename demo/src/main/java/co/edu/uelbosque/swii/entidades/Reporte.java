@@ -11,6 +11,7 @@ public class Reporte implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer id;
 	@Column(name="solicitante")
@@ -21,6 +22,9 @@ public class Reporte implements Serializable {
 	private Date fechaPrestamo;
 	@Column(name="fecha_devolucion")
 	private Date fechaDevolucion;
+	
+	public Reporte() {
+	}
 	
 	public Reporte(Integer id, Integer idSolicitante, String nomProducto,
 			Date fechaPrestamo, Date fechaDevolucion) {
